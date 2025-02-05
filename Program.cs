@@ -5,6 +5,9 @@ namespace Stopwatch
 {
     class Program
     {
+        static char type;
+        static int originalTime;
+
         static void Main(string[] args)
         {
             Menu();
@@ -29,8 +32,9 @@ namespace Stopwatch
                 Error("Valor inválido!");
             }
 
-            char type = char.Parse(data.Substring(data.Length - 1, 1));
+            type = char.Parse(data.Substring(data.Length - 1, 1));
             int time = int.Parse(data.Substring(0, data.Length - 1));
+            originalTime = time;
 
             if (time <= 0)
             {
@@ -73,7 +77,9 @@ namespace Stopwatch
             }
 
             Console.Clear();
-            Console.WriteLine($"Pronto! Contei até {time} segundo(s)");
+            string secOrmin = type == 's' ? "segundo(s)" : "minuto(s)";
+            Console.WriteLine($"Pronto! Contei até {originalTime} {secOrmin}");
+            Console.ReadKey();
             Thread.Sleep(2000);
             Menu();
         }
